@@ -1,3 +1,4 @@
+import 'package:GFAS/cadastro_administrador.dart';
 import 'package:GFAS/constants.dart';
 import 'package:flutter/material.dart';
 
@@ -8,18 +9,38 @@ class GFASApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'GFAS',
         debugShowCheckedModeBanner: false,
+        title: 'GFAS',
         home: Scaffold(
             body: Center(
                 child: Column(
-          children: <Widget>[
-            const SizedBox(height: 90),
-            Image.asset(WELCOME_LOGO, height: 300, width: 250),
-            const SizedBox(height: 50),
-            HomeButtons()
-          ],
-        ))));
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    HomeLogo(),
+                    HomeButtons()
+                  ],
+              )
+            )
+        ),
+      routes: <String, WidgetBuilder> {
+          '/cadastroAdministrador': (BuildContext context) => CadastroAdministrador()
+      },
+    );
+  }
+}
+
+class HomeLogo extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        Image.asset(HOME_LOGO, height: 300, width: 250, ),
+      ],
+    );
   }
 }
 
@@ -27,9 +48,7 @@ class HomeButtons extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisSize: MainAxisSize.max,
-      mainAxisAlignment: MainAxisAlignment.end,
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: <Widget>[
         FlatButton(
             onPressed: () {},
@@ -38,22 +57,27 @@ class HomeButtons extends StatelessWidget {
               child: Center(
                 child: Text(ENTRAR, style: TextStyle(fontSize: 28)),
               ),
-              width: 300,
-              height: 100,
+              width: HOME_LARGURA_BOTAO,
+              height: HOME_ALTURA_BOTAO,
             )),
         const SizedBox(
           height: 10,
         ),
         FlatButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).pushNamed('/cadastroAdministrador');
+            },
             child: Container(
               color: Colors.red,
               child: Center(
                 child: Text(CADASTRAR, style: TextStyle(fontSize: 28)),
               ),
-              width: 300,
-              height: 100,
-            ))
+              width: HOME_LARGURA_BOTAO,
+              height: HOME_ALTURA_BOTAO,
+            )),
+        const SizedBox(
+          height: 20,
+        ),
       ],
     );
   }
