@@ -60,9 +60,6 @@ class HomeButtons extends StatelessWidget {
               width: HOME_LARGURA_BOTAO,
               height: HOME_ALTURA_BOTAO,
             )),
-        const SizedBox(
-          height: 10,
-        ),
         FlatButton(
             onPressed: () {
               Navigator.of(context).pushNamed('/cadastroAdministrador');
@@ -72,12 +69,10 @@ class HomeButtons extends StatelessWidget {
               child: Center(
                 child: Text(CADASTRAR, style: TextStyle(fontSize: 28)),
               ),
-              width: HOME_LARGURA_BOTAO,
               height: HOME_ALTURA_BOTAO,
+              margin: EdgeInsets.only(top: 10.0, bottom: 20.0),
+              width: HOME_LARGURA_BOTAO,
             )),
-        const SizedBox(
-          height: 20,
-        ),
       ],
     );
   }
