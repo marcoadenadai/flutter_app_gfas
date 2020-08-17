@@ -1,4 +1,5 @@
 import 'package:GFAS/cadastro_administrador.dart';
+import 'package:GFAS/entrar_opcao.dart';
 import 'package:GFAS/cadastro_opcao.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
