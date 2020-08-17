@@ -1,3 +1,5 @@
+import 'package:GFAS/cadastro_opcao.dart';
+import 'package:GFAS/entrar_opcao.dart';
 import 'package:GFAS/cadastro_administrador.dart';
 import 'package:GFAS/constants.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +12,23 @@ class GFASApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+        // Define the default brightness and colors.
+        brightness: Brightness.light,
+        primaryColor: Colors.lightBlue[800],
+        accentColor: Colors.cyan[600],
+
+        // Define the default font family.
+        fontFamily: 'Arial',
+
+        // Define the default TextTheme. Use this to specify the default
+        // text styling for headlines, titles, bodies of text, and more.
+        textTheme: TextTheme(
+        headline1: TextStyle(fontSize: 72.0, fontWeight: FontWeight.bold),
+        headline6: TextStyle(fontSize: 36.0, fontStyle: FontStyle.italic),
+        bodyText2: TextStyle(fontSize: 14.0, fontFamily: 'Hind'),
+        ),
+        ),
         title: 'GFAS',
         home: Scaffold(
             body: Center(
@@ -26,7 +45,9 @@ class GFASApp extends StatelessWidget {
             )
         ),
       routes: <String, WidgetBuilder> {
-          '/cadastroAdministrador': (BuildContext context) => CadastroAdministrador()
+          '/cadastroAdministrador': (BuildContext context) => CadastroAdministrador(),
+          '/cadastroOpcao': (BuildContext context) => CadastroOpcao(),
+          '/entrarOpcao': (BuildContext context) => EntrarOpcao()
       },
     );
   }
@@ -38,7 +59,7 @@ class HomeLogo extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        Image.asset(HOME_LOGO, height: 300, width: 250, ),
+        Image.asset(HOME_LOGO, height: 300, width: 250 ),
       ],
     );
   }
@@ -51,7 +72,9 @@ class HomeButtons extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: <Widget>[
         FlatButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).pushNamed('/entrarOpcao');
+            },
             child: Container(
               color: Colors.lightBlue,
               child: Center(
@@ -62,7 +85,7 @@ class HomeButtons extends StatelessWidget {
             )),
         FlatButton(
             onPressed: () {
-              Navigator.of(context).pushNamed('/cadastroAdministrador');
+              Navigator.of(context).pushNamed('/cadastroOpcao');
             },
             child: Container(
               color: Colors.red,
