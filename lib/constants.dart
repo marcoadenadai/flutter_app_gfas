@@ -1,4 +1,5 @@
 import 'package:GFAS/cadastro_administrador.dart';
+import 'package:GFAS/cadastro_opcao.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 const HOME_LOGO = 'resources/welcome_logo.png';
@@ -11,6 +12,10 @@ const O = 'o';
 const DIGITE = 'Digite';
 const POR_FAVOR_DIGITE = 'Por favor digite';
 const SALVAR = 'Salvar';
+
+// Cadastro Opcao
+const ADM_IMG = "resources/admin.png";
+const BOMB_IMG = 'resources/bombeiro.png';
 
 //Cadastro Administrador
 const NOME = 'Nome';
