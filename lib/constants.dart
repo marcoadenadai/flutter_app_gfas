@@ -35,3 +35,8 @@ const VALIDACAO_EMAIL = '$EMAIL com formato inválido';
 const VALIDACAO_TELEFONE = '$TELEFONE deve possuir no mínimo 10 digitos';
 const VALIDACAO_CPF = '$CPF deve possuir 11 dígitos';
 const VALIDACAO_CEP = '$CEP deve possuir 8 dígitos';
+
+//Cadastro Bombeiro
+const ENDERECO = 'Endereço';
+
+const HINT_ENDERECO = 'Nome do Endereço';
