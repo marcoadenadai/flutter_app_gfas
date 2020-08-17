@@ -37,7 +37,7 @@ class CadastroOpcao extends StatelessWidget {
             BombeiroImage(),
             FlatButton(
                 onPressed: () {
-                  //Navigator.of(context).pushNamed('/cadastroBombeiro');
+                  Navigator.of(context).pushNamed('/cadastroBombeiro');
                 },
                 child: Container(
                   color: Colors.red,
