@@ -1,6 +1,7 @@
 import 'package:GFAS/cadastro_opcao.dart';
 import 'package:GFAS/entrar_opcao.dart';
 import 'package:GFAS/cadastro_administrador.dart';
+import 'package:GFAS/cadastro_bombeiro.dart';
 import 'package:GFAS/constants.dart';
 import 'package:flutter/material.dart';
 
@@ -46,6 +47,7 @@ class GFASApp extends StatelessWidget {
         ),
       routes: <String, WidgetBuilder> {
           '/cadastroAdministrador': (BuildContext context) => CadastroAdministrador(),
+          '/cadastroBombeiro': (BuildContext context) => CadastroBombeiro(),
           '/cadastroOpcao': (BuildContext context) => CadastroOpcao(),
           '/entrarOpcao': (BuildContext context) => EntrarOpcao()
       },
