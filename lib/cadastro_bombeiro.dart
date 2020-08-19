@@ -118,7 +118,7 @@ class CadastroBombeiroState extends State<CadastroBombeiro> {
                                   hintText: HINT_ENDERECO
                               ),
                               validator: (value) {
-                                return value.isEmpty ? '$POR_FAVOR_DIGITE $O $HINT_AREA' : null;
+                                return value.isEmpty ? '$POR_FAVOR_DIGITE $O $HINT_ENDERECO' : null;
                               },
                               onSaved: (value) {
                                 endereco = value;
