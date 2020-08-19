@@ -21,10 +21,8 @@ class CadastroBombeiroState extends State<CadastroBombeiro> {
   String senha = '';
   String email = '';
   String telefone = '';
-  String cpf = '';
-  String rg = '';
   String cep = '';
-  String nomeArea = '';
+  String endereco = '';
 
   var maskTelefone = new MaskTextInputFormatter(mask: '(##) #####-####', filter: { "#": RegExp(r'[0-9]') });
   var maskCPF = new MaskTextInputFormatter(mask: '###.###.###-##', filter: { "#": RegExp(r'[0-9]') });
@@ -163,7 +161,7 @@ class CadastroBombeiroState extends State<CadastroBombeiro> {
         'email': email,
         'telefone': telefone,
         'cep': cep,
-        //'endereco': endereco,
+        'endereco': endereco
       }),
     );
 
