@@ -121,7 +121,7 @@ class CadastroBombeiroState extends State<CadastroBombeiro> {
                                 return value.isEmpty ? '$POR_FAVOR_DIGITE $O $HINT_AREA' : null;
                               },
                               onSaved: (value) {
-                                nomeArea = value;
+                                endereco = value;
                               },
                             ),
                             RaisedButton(
