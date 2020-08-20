@@ -24,7 +24,7 @@ class EntrarOpcao extends StatelessWidget {
             AdministradorImage(),
             FlatButton(
                 onPressed: () {
-                  //Navigator.of(context).pushNamed('/cadastroAdministrador');
+                  Navigator.of(context).pushNamed('/menuAdministrador');
                 },
                 child: Container(
                   color: Colors.lightBlue,
