@@ -1,6 +1,8 @@
-import 'package:GFAS/cadastro_administrador.dart';
-import 'package:GFAS/entrar_opcao.dart';
 import 'package:GFAS/cadastro_opcao.dart';
+import 'package:GFAS/entrar_opcao.dart';
+import 'package:GFAS/cadastro_administrador.dart';
+import 'package:GFAS/cadastro_bombeiro.dart';
+import 'package:GFAS/menu_administrador.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 const HOME_LOGO = 'resources/welcome_logo.png';
@@ -13,6 +15,10 @@ const O = 'o';
 const DIGITE = 'Digite';
 const POR_FAVOR_DIGITE = 'Por favor digite';
 const SALVAR = 'Salvar';
+const BOTAO_X_ALTURA = 50.0;
+const BOTAO_X_LARGURA = 50.0;
+const MENU_BOTAO_ALTURA = 80.0;
+const MENU_BOTAO_LARGURA = 350.0;
 
 // Cadastro Opcao
 const ADM_IMG = "resources/admin.png";
