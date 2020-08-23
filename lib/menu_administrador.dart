@@ -114,7 +114,7 @@ class BotaoFAQ extends StatelessWidget {
   Widget build(BuildContext context) {
     return FlatButton(
       onPressed: () {
-        //Navigator.of(context).pushNamed('/menuAdministrador');
+        Navigator.of(context).pushNamed('/faq');
       },
       child: Container(
         color: Colors.black26,
