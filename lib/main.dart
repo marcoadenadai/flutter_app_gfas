@@ -5,8 +5,17 @@ import 'package:GFAS/cadastro_bombeiro.dart';
 import 'package:GFAS/menu_administrador.dart';
 import 'package:GFAS/login_administrador.dart';
 import 'package:GFAS/login_bombeiro.dart';
+import 'package:GFAS/mapa_administrador.dart';
+import 'package:GFAS/faq.dart';
 import 'package:GFAS/constants.dart';
 import 'package:flutter/material.dart';
+
+import 'dart:io';
+import 'dart:typed_data';
+
+import 'package:flutter/material.dart';
+import 'package:screenshot/screenshot.dart';
+import 'package:image_gallery_saver/image_gallery_saver.dart';
 
 void main() => runApp(GFASApp());
 
@@ -50,12 +59,14 @@ class GFASApp extends StatelessWidget {
         ),
       routes: <String, WidgetBuilder> {
           '/cadastroAdministrador': (BuildContext context) => CadastroAdministrador(),
+          '/mapaAdministrador': (BuildContext context) => MapaAdministrador(),
           '/menuAdministrador': (BuildContext context) => MenuAdministrador(),
           '/loginAdministrador': (BuildContext context) => LoginAdministrador(),
           '/loginBombeiro': (BuildContext context) => LoginBombeiro(),
           '/cadastroBombeiro': (BuildContext context) => CadastroBombeiro(),
           '/cadastroOpcao': (BuildContext context) => CadastroOpcao(),
-          '/entrarOpcao': (BuildContext context) => EntrarOpcao()
+          '/entrarOpcao': (BuildContext context) => EntrarOpcao(),
+          '/faq': (BuildContext context) => FAQ()
       },
     );
   }
