@@ -12,6 +12,7 @@ class FAQ extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
           title: const Text('FAQ'),
@@ -48,16 +49,14 @@ final List<Entry> data = <Entry>[
     'Os beneficios do GFAS',
     <Entry>[
       Entry(
-          'O sistema visa monitorar continuamente áreas remotas propensas a incêndios florestais. Além disso, também busca detectar antecipadamente e alertar incidentes de incêndio, bem como a comunicação de dados críticos. '
-      ),
+          'O sistema visa monitorar continuamente áreas remotas propensas a incêndios florestais. Além disso, também busca detectar antecipadamente e alertar incidentes de incêndio, bem como a comunicação de dados críticos. '),
     ],
   ),
   Entry(
     'Como funciona o GFAS',
     <Entry>[
       Entry(
-        'O sistema é usado para alarme de incêndio, gerenciamento de equipamentos, além de selecionar a melhor rota de resgate utilizando GIS para pesquisa de base e projetar o módulo de função do sistema com CRT para exibição gráfica. O sistema oferece um meio de avaliar, analisar, planejar e implementar pesquisas ambientais. A tecnologia é usada como ferramenta para entender melhor as mudanças climáticas e ambientais. O sensoriamento remoto viabiliza a capacidade de monitorar recursos e mudanças na Terra e o GIS fornece as ferramentas para integrar e analisar o grande volumede geoinformação. A detecção inteligente de incêndio e o sistema de alerta estabelecido por uma região de reconhecimento correspondente a um pixel e o reconhecimento da distorção causada por pequenas chamas. Este artigo oferece uma visão geral de modelos de dados espaço-temporais relevantes e a análise das tendências e desenvolvimentos em T-GIS.'
-      ),
+          'O sistema é usado para alarme de incêndio, gerenciamento de equipamentos, além de selecionar a melhor rota de resgate utilizando GIS para pesquisa de base e projetar o módulo de função do sistema com CRT para exibição gráfica. O sistema oferece um meio de avaliar, analisar, planejar e implementar pesquisas ambientais. A tecnologia é usada como ferramenta para entender melhor as mudanças climáticas e ambientais. O sensoriamento remoto viabiliza a capacidade de monitorar recursos e mudanças na Terra e o GIS fornece as ferramentas para integrar e analisar o grande volumede geoinformação. A detecção inteligente de incêndio e o sistema de alerta estabelecido por uma região de reconhecimento correspondente a um pixel e o reconhecimento da distorção causada por pequenas chamas. Este artigo oferece uma visão geral de modelos de dados espaço-temporais relevantes e a análise das tendências e desenvolvimentos em T-GIS.'),
     ],
   ),
   Entry(

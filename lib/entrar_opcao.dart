@@ -20,16 +20,18 @@ class EntrarOpcao extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget>[
-            Text('Entrar como:', style: TextStyle( fontSize: 20, color: Colors.grey)),
+            Text('Entrar como:',
+                style: TextStyle(fontSize: 20, color: Colors.grey)),
             AdministradorImage(),
             FlatButton(
                 onPressed: () {
-                  Navigator.of(context).pushNamed('/mapaAdministrador');
+                  Navigator.of(context).pushNamed('/menuAdministrador');
                 },
                 child: Container(
                   color: Colors.lightBlue,
                   child: Center(
-                    child: Text('Administrador', style: TextStyle(fontSize: 28)),
+                    child:
+                        Text('Administrador', style: TextStyle(fontSize: 28)),
                   ),
                   width: HOME_LARGURA_BOTAO,
                   height: HOME_ALTURA_BOTAO,
@@ -42,7 +44,8 @@ class EntrarOpcao extends StatelessWidget {
                 child: Container(
                   color: Colors.red,
                   child: Center(
-                    child: Text('Corpo de Bombeiros', style: TextStyle(fontSize: 28)),
+                    child: Text('Corpo de Bombeiros',
+                        style: TextStyle(fontSize: 28)),
                   ),
                   height: HOME_ALTURA_BOTAO,
                   margin: EdgeInsets.only(top: 10.0, bottom: 20.0),
@@ -61,7 +64,11 @@ class AdministradorImage extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        Image.asset(ADM_IMG, height: 200, width: 150, ),
+        Image.asset(
+          ADM_IMG,
+          height: 200,
+          width: 150,
+        ),
       ],
     );
   }
@@ -73,7 +80,11 @@ class BombeiroImage extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        Image.asset(BOMB_IMG, height: 200, width: 150, ),
+        Image.asset(
+          BOMB_IMG,
+          height: 200,
+          width: 150,
+        ),
       ],
     );
   }

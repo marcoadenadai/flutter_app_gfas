@@ -13,11 +13,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 
-import 'dart:io';
-import 'dart:typed_data';
-
-import 'package:flutter/material.dart';
-
 void main() => runApp(GFASApp());
 
 class GFASApp extends StatefulWidget {
@@ -103,7 +98,6 @@ class GFASApp extends StatefulWidget {
 
 }*/
 
-
 class GFASAppExecute extends State<GFASApp> {
   FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
   var fogo = 1;
@@ -119,14 +113,14 @@ class GFASAppExecute extends State<GFASApp> {
         onSelectNotification: selectNotification);
   }
 
-  Future selectNotification(String payload) async{
+  Future selectNotification(String payload) async {
     debugPrint("payload: $payload");
     showDialog(
         context: context,
         builder: (_) => new AlertDialog(
-          title: new Text('Notification'),
-          content: new Text('$payload'),
-        ));
+              title: new Text('Notification'),
+              content: new Text('$payload'),
+            ));
   }
 
   // This widget is the root of your application.
@@ -155,21 +149,22 @@ class GFASAppExecute extends State<GFASApp> {
       home: Scaffold(
           body: Center(
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  /*if(fogo == 1)
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
+          const SizedBox(
+            height: 5,
+          ),
+          /*if(fogo == 1)
                     showNotification(),*/
-                  Center(child: Image.asset(HOME_LOGO, height: 300, width: 250)),
-                  HomeButtons(
-                    onPressed: showNotification,
-                  )
-                ],
-              ))),
+          Center(child: Image.asset(HOME_LOGO, height: 300, width: 250)),
+          HomeButtons(
+            onPressed: showNotification,
+          )
+        ],
+      ))),
       routes: <String, WidgetBuilder>{
-        '/cadastroAdministrador': (BuildContext context) => CadastroAdministrador(),
+        '/cadastroAdministrador': (BuildContext context) =>
+            CadastroAdministrador(),
         //'/mapaAdministrador': (BuildContext context) => MapaAdministrador(),
         '/menuAdministrador': (BuildContext context) => MenuAdministrador(),
         '/loginAdministrador': (BuildContext context) => LoginAdministrador(),
@@ -188,7 +183,8 @@ class GFASAppExecute extends State<GFASApp> {
         importance: Importance.Max, priority: Priority.High, ticker: 'ticker');
     var ios = new IOSNotificationDetails();
     var platform = new NotificationDetails(android, ios);
-    await flutterLocalNotificationsPlugin.show(0, 'GFAS', 'Novo Risco', platform,
+    await flutterLocalNotificationsPlugin.show(
+        0, 'GFAS', 'Novo Risco', platform,
         payload: 'Esta pegando fogo nesta area');
   }
 }
@@ -204,10 +200,10 @@ class HomeButtons extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: <Widget>[
         FlatButton(
-            /*onPressed: () {
+            onPressed: () {
               Navigator.of(context).pushNamed('/entrarOpcao');
-            },*/
-            onPressed: onPressed,
+            },
+            //onPressed: onPressed,
             child: Container(
               color: Colors.lightBlue,
               child: Center(
