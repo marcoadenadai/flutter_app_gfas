@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class MenuAdministrador extends StatelessWidget {
   @override
@@ -54,6 +55,7 @@ class BotaoChamarBombeiro extends StatelessWidget {
   Widget build(BuildContext context) {
     return FlatButton(
         onPressed: () {
+          launch("tel://193");
           //Navigator.of(context).pushNamed('/menuAdministrador');
         },
         child: Container(
