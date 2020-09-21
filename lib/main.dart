@@ -165,7 +165,7 @@ class GFASAppExecute extends State<GFASApp> {
       routes: <String, WidgetBuilder>{
         '/cadastroAdministrador': (BuildContext context) =>
             CadastroAdministrador(),
-        //'/mapaAdministrador': (BuildContext context) => MapaAdministrador(),
+        '/mapaAdministrador': (BuildContext context) => MapaAdministrador(),
         '/menuAdministrador': (BuildContext context) => MenuAdministrador(),
         '/loginAdministrador': (BuildContext context) => LoginAdministrador(),
         '/loginBombeiro': (BuildContext context) => LoginBombeiro(),

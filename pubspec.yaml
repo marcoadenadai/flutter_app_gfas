@@ -26,7 +26,7 @@ dependencies:
   flutter_local_notifications: ^1.4.4+4
   firebase_messaging: ^7.0.0
   url_launcher: ^5.6.0
-  geolocator: ^6.0.0+4
+  nominatim_location_picker: any
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
