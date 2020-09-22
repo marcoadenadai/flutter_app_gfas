@@ -36,7 +36,7 @@ dependencies:
   email_validator: ^1.0.0
 
   # Field formatter
-  mask_text_input_formatter: ^1.0.7
+  mask_text_input_formatter: ^1.1.0
 
   # HTTP calls
   http: ^0.12.1

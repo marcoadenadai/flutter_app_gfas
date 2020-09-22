@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:GFAS/constants.dart';
 import 'package:email_validator/email_validator.dart';
@@ -143,7 +142,7 @@ class CadastroBombeiroState extends State<CadastroBombeiro> {
     if (_formKey.currentState.validate()) {
       _formKey.currentState.save();
 
-      print ('Salvou ${nome}');
+      print ('Salvou $nome');
       criarBombeiro();
 
     }

@@ -1,15 +1,5 @@
-import 'dart:convert';
-import 'dart:io';
-
 import 'package:GFAS/constants.dart';
 import 'package:flutter/material.dart';
-
-import 'package:GFAS/constants.dart';
-import 'package:email_validator/email_validator.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:http/http.dart' as http;
-import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 class CadastroOpcao extends StatelessWidget {
   @override
@@ -20,7 +10,8 @@ class CadastroOpcao extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget>[
-            Text('Cadastrar como:', style: TextStyle( fontSize: 20, color: Colors.grey)),
+            Text('Cadastrar como:',
+                style: TextStyle(fontSize: 20, color: Colors.grey)),
             AdministradorImage(),
             FlatButton(
                 onPressed: () {
@@ -29,7 +20,8 @@ class CadastroOpcao extends StatelessWidget {
                 child: Container(
                   color: Colors.lightBlue,
                   child: Center(
-                    child: Text('Administrador', style: TextStyle(fontSize: 28)),
+                    child:
+                        Text('Administrador', style: TextStyle(fontSize: 28)),
                   ),
                   width: HOME_LARGURA_BOTAO,
                   height: HOME_ALTURA_BOTAO,
@@ -42,7 +34,8 @@ class CadastroOpcao extends StatelessWidget {
                 child: Container(
                   color: Colors.red,
                   child: Center(
-                    child: Text('Corpo de Bombeiros', style: TextStyle(fontSize: 28)),
+                    child: Text('Corpo de Bombeiros',
+                        style: TextStyle(fontSize: 28)),
                   ),
                   height: HOME_ALTURA_BOTAO,
                   margin: EdgeInsets.only(top: 10.0, bottom: 20.0),
@@ -61,7 +54,11 @@ class AdministradorImage extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        Image.asset(ADM_IMG, height: 200, width: 150, ),
+        Image.asset(
+          ADM_IMG,
+          height: 200,
+          width: 150,
+        ),
       ],
     );
   }
@@ -73,10 +70,12 @@ class BombeiroImage extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        Image.asset(BOMB_IMG, height: 200, width: 150, ),
+        Image.asset(
+          BOMB_IMG,
+          height: 200,
+          width: 150,
+        ),
       ],
     );
   }
 }
-
-

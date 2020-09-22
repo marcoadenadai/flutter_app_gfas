@@ -1,12 +1,5 @@
-import 'dart:convert';
-import 'dart:io';
-
 import 'package:GFAS/constants.dart';
-import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:http/http.dart' as http;
-import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class MenuAdministrador extends StatelessWidget {
