@@ -4,14 +4,15 @@ import 'package:flutter/material.dart';
 class CadastroOpcao extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Container(
-        color: Colors.white,
+    return Scaffold(
+      body: SafeArea(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget>[
             Text('Cadastrar como:',
-                style: TextStyle(fontSize: 20, color: Colors.grey)),
+                style: TextStyle(
+                    fontSize: MediaQuery.of(context).size.width * 0.05,
+                    color: Colors.grey)),
             AdministradorImage(),
             FlatButton(
                 onPressed: () {
@@ -20,11 +21,13 @@ class CadastroOpcao extends StatelessWidget {
                 child: Container(
                   color: Colors.lightBlue,
                   child: Center(
-                    child:
-                        Text('Administrador', style: TextStyle(fontSize: 28)),
+                    child: Text('Administrador',
+                        style: TextStyle(
+                            fontSize:
+                                MediaQuery.of(context).size.width * 0.07)),
                   ),
-                  width: HOME_LARGURA_BOTAO,
-                  height: HOME_ALTURA_BOTAO,
+                  height: MediaQuery.of(context).size.height * 0.14,
+                  width: MediaQuery.of(context).size.width * 0.75,
                 )),
             BombeiroImage(),
             FlatButton(
@@ -35,11 +38,13 @@ class CadastroOpcao extends StatelessWidget {
                   color: Colors.red,
                   child: Center(
                     child: Text('Corpo de Bombeiros',
-                        style: TextStyle(fontSize: 28)),
+                        style: TextStyle(
+                            fontSize:
+                                MediaQuery.of(context).size.width * 0.07)),
                   ),
-                  height: HOME_ALTURA_BOTAO,
-                  margin: EdgeInsets.only(top: 10.0, bottom: 20.0),
-                  width: HOME_LARGURA_BOTAO,
+                  margin: EdgeInsets.only(bottom: 20.0),
+                  height: MediaQuery.of(context).size.height * 0.14,
+                  width: MediaQuery.of(context).size.width * 0.75,
                 )),
           ],
         ),
@@ -56,8 +61,8 @@ class AdministradorImage extends StatelessWidget {
       children: <Widget>[
         Image.asset(
           ADM_IMG,
-          height: 200,
-          width: 150,
+          height: MediaQuery.of(context).size.height * 0.30,
+          width: MediaQuery.of(context).size.width * 0.30,
         ),
       ],
     );
@@ -72,8 +77,8 @@ class BombeiroImage extends StatelessWidget {
       children: <Widget>[
         Image.asset(
           BOMB_IMG,
-          height: 200,
-          width: 150,
+          height: MediaQuery.of(context).size.height * 0.30,
+          width: MediaQuery.of(context).size.width * 0.30,
         ),
       ],
     );

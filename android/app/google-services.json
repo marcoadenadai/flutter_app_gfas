@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "259814597675",
+    "firebase_url": "https://gfas-8c40d.firebaseio.com",
+    "project_id": "gfas-8c40d",
+    "storage_bucket": "gfas-8c40d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:259814597675:android:47b55792b8a1aacfeb366e",
+        "android_client_info": {
+          "package_name": "com.gfas"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "259814597675-pbiip12lplkal4ome9u3aaqe17po15rp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAvaZZb6wCsOO8m7F7rYF2FxKZ6t5_VQzM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "259814597675-pbiip12lplkal4ome9u3aaqe17po15rp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

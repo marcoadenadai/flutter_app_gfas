@@ -1,6 +1,6 @@
 # gfas
 
-GFAS App
+Global Fire Alert System (GFAS) App
 
 ## Getting Started
 

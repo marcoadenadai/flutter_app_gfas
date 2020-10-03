@@ -3,50 +3,50 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
-class LoginBombeiro extends StatefulWidget {
-
+class LoginAdministrador extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() => LoginBombeiroState();
+  State<StatefulWidget> createState() => LoginAdministradorState();
 }
 
-class LoginBombeiroState extends State<LoginBombeiro> {
+class LoginAdministradorState extends State<LoginAdministrador> {
   final _formKey = GlobalKey<FormState>();
 
   String email = '';
   String senha = '';
   String telefone = '';
 
-  var maskTelefone = new MaskTextInputFormatter(mask: '(##) #####-####', filter: { "#": RegExp(r'[0-9]') });
+  var maskTelefone = new MaskTextInputFormatter(
+      mask: '(##) #####-####', filter: {"#": RegExp(r'[0-9]')});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.black,
-          title: Text('Acesso Corpo de Bombeiros'),
+          title: Text('Acesso Administrador'),
         ),
         body: Material(
             child: SingleChildScrollView(
                 child: Container(
-                  color: Colors.white,
-                    margin: EdgeInsets.symmetric(horizontal: 10.0),
+                    margin: EdgeInsets.symmetric(
+                        horizontal: MediaQuery.of(context).size.width * 0.1),
                     child: Form(
                         key: _formKey,
                         child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
                           children: <Widget>[
-                            BombeiroImage(),
+                            AdministradorImage(),
                             TextFormField(
                               decoration: InputDecoration(
                                   labelText: TELEFONE,
-                                  hintText: '$DIGITE $O $TELEFONE'
-                              ),
+                                  hintText: '$DIGITE $O $TELEFONE'),
                               keyboardType: TextInputType.phone,
-                              inputFormatters: [
-                                maskTelefone
-                              ],
+                              inputFormatters: [maskTelefone],
                               validator: (value) {
-                                return value.isEmpty || maskTelefone.getUnmaskedText().length < 10 ? VALIDACAO_TELEFONE : null;
+                                return value.isEmpty ||
+                                        maskTelefone.getUnmaskedText().length <
+                                            10
+                                    ? VALIDACAO_TELEFONE
+                                    : null;
                               },
                               onSaved: (value) {
                                 telefone = maskTelefone.getUnmaskedText();
@@ -56,10 +56,11 @@ class LoginBombeiroState extends State<LoginBombeiro> {
                               obscureText: true,
                               decoration: InputDecoration(
                                   labelText: SENHA,
-                                  hintText: '$DIGITE $A $SENHA'
-                              ),
+                                  hintText: '$DIGITE $A $SENHA'),
                               validator: (value) {
-                                return value.isEmpty || value.length < 6 ? VALIDACAO_SENHA : null;
+                                return value.isEmpty || value.length < 6
+                                    ? VALIDACAO_SENHA
+                                    : null;
                               },
                               onSaved: (value) {
                                 senha = value;
@@ -69,27 +70,27 @@ class LoginBombeiroState extends State<LoginBombeiro> {
                               child: Text("Entrar"),
                               onPressed: () {
                                 //submeter(context);
-                                //Navigator.of(context).pushNamed('/menuAdministrador');
-                              }
-                              ),
+                                Navigator.of(context)
+                                    .pushNamed('/menuAdministrador');
+                              },
+                            ),
                             BotaoCadastroGFAS(),
                           ],
-                        )
-                    )
-                )
-            )
-        )
-    );
+                        ))))));
   }
 }
 
-class BombeiroImage extends StatelessWidget {
+class AdministradorImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        Image.asset(BOMB_IMG, height: 200, width: 150, ),
+        Image.asset(
+          ADM_IMG,
+          height: MediaQuery.of(context).size.height * 0.30,
+          width: MediaQuery.of(context).size.width * 0.75,
+        ),
       ],
     );
   }
@@ -102,10 +103,15 @@ class BotaoCadastroGFAS extends StatelessWidget {
       alignment: Alignment.bottomCenter,
       child: FlatButton(
         onPressed: () {
-          Navigator.of(context).pushNamed('/cadastroBombeiro');
+          Navigator.of(context).pushNamed('/cadastroAdministrador');
         },
-        child: Text('Cadastrar-se no GFAS', style: TextStyle(fontSize: 18, color: Colors.blue, decoration: TextDecoration.underline,)),
+        child: Text('Cadastrar-se no GFAS',
+            style: TextStyle(
+              fontSize: MediaQuery.of(context).size.width * 0.05,
+              color: Colors.blue,
+              decoration: TextDecoration.underline,
+            )),
       ),
-      );
+    );
   }
 }
