@@ -8,7 +8,6 @@ import 'package:http/http.dart' as http;
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 class CadastroBombeiro extends StatefulWidget {
-
   @override
   State<StatefulWidget> createState() => CadastroBombeiroState();
 }
@@ -23,9 +22,12 @@ class CadastroBombeiroState extends State<CadastroBombeiro> {
   String cep = '';
   String endereco = '';
 
-  var maskTelefone = new MaskTextInputFormatter(mask: '(##) #####-####', filter: { "#": RegExp(r'[0-9]') });
-  var maskCPF = new MaskTextInputFormatter(mask: '###.###.###-##', filter: { "#": RegExp(r'[0-9]') });
-  var maskCEP = new MaskTextInputFormatter(mask: '##.###-###', filter: { "#": RegExp(r'[0-9]') });
+  var maskTelefone = new MaskTextInputFormatter(
+      mask: '(##) #####-####', filter: {"#": RegExp(r'[0-9]')});
+  var maskCPF = new MaskTextInputFormatter(
+      mask: '###.###.###-##', filter: {"#": RegExp(r'[0-9]')});
+  var maskCEP = new MaskTextInputFormatter(
+      mask: '##.###-###', filter: {"#": RegExp(r'[0-9]')});
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +38,8 @@ class CadastroBombeiroState extends State<CadastroBombeiro> {
         body: Material(
             child: SingleChildScrollView(
                 child: Container(
-                    margin: EdgeInsets.symmetric(horizontal: 10.0),
+                    margin: EdgeInsets.symmetric(
+                        horizontal: MediaQuery.of(context).size.width * 0.1),
                     child: Form(
                         key: _formKey,
                         child: Column(
@@ -47,7 +50,9 @@ class CadastroBombeiroState extends State<CadastroBombeiro> {
                                 hintText: '$DIGITE $O $NOME',
                               ),
                               validator: (value) {
-                                return value.isEmpty ? '$POR_FAVOR_DIGITE $O $NOME' : null;
+                                return value.isEmpty
+                                    ? '$POR_FAVOR_DIGITE $O $NOME'
+                                    : null;
                               },
                               onSaved: (value) {
                                 nome = value;
@@ -57,10 +62,11 @@ class CadastroBombeiroState extends State<CadastroBombeiro> {
                               obscureText: true,
                               decoration: InputDecoration(
                                   labelText: SENHA,
-                                  hintText: '$DIGITE $A $SENHA'
-                              ),
+                                  hintText: '$DIGITE $A $SENHA'),
                               validator: (value) {
-                                return value.isEmpty || value.length < 6 ? VALIDACAO_SENHA : null;
+                                return value.isEmpty || value.length < 6
+                                    ? VALIDACAO_SENHA
+                                    : null;
                               },
                               onSaved: (value) {
                                 senha = value;
@@ -69,11 +75,12 @@ class CadastroBombeiroState extends State<CadastroBombeiro> {
                             TextFormField(
                               decoration: InputDecoration(
                                   labelText: EMAIL,
-                                  hintText: '$DIGITE $O $EMAIL'
-                              ),
+                                  hintText: '$DIGITE $O $EMAIL'),
                               keyboardType: TextInputType.emailAddress,
                               validator: (value) {
-                                return EmailValidator.validate(value) ? null : VALIDACAO_EMAIL;
+                                return EmailValidator.validate(value)
+                                    ? null
+                                    : VALIDACAO_EMAIL;
                               },
                               onSaved: (value) {
                                 email = value;
@@ -82,14 +89,15 @@ class CadastroBombeiroState extends State<CadastroBombeiro> {
                             TextFormField(
                               decoration: InputDecoration(
                                   labelText: TELEFONE,
-                                  hintText: '$DIGITE $O $TELEFONE'
-                              ),
+                                  hintText: '$DIGITE $O $TELEFONE'),
                               keyboardType: TextInputType.phone,
-                              inputFormatters: [
-                                maskTelefone
-                              ],
+                              inputFormatters: [maskTelefone],
                               validator: (value) {
-                                return value.isEmpty || maskTelefone.getUnmaskedText().length < 10 ? VALIDACAO_TELEFONE : null;
+                                return value.isEmpty ||
+                                        maskTelefone.getUnmaskedText().length <
+                                            10
+                                    ? VALIDACAO_TELEFONE
+                                    : null;
                               },
                               onSaved: (value) {
                                 telefone = maskTelefone.getUnmaskedText();
@@ -97,15 +105,14 @@ class CadastroBombeiroState extends State<CadastroBombeiro> {
                             ),
                             TextFormField(
                               decoration: InputDecoration(
-                                  labelText: CEP,
-                                  hintText: '$DIGITE $O $CEP'
-                              ),
+                                  labelText: CEP, hintText: '$DIGITE $O $CEP'),
                               keyboardType: TextInputType.number,
-                              inputFormatters: [
-                                maskCEP
-                              ],
+                              inputFormatters: [maskCEP],
                               validator: (value) {
-                                return value.isEmpty || maskCEP.getUnmaskedText().length < 8 ? VALIDACAO_CEP : null;
+                                return value.isEmpty ||
+                                        maskCEP.getUnmaskedText().length < 8
+                                    ? VALIDACAO_CEP
+                                    : null;
                               },
                               onSaved: (value) {
                                 cep = maskCEP.getUnmaskedText();
@@ -113,38 +120,35 @@ class CadastroBombeiroState extends State<CadastroBombeiro> {
                             ),
                             TextFormField(
                               decoration: InputDecoration(
-                                  labelText: ENDERECO,
-                                  hintText: HINT_ENDERECO
-                              ),
+                                  labelText: ENDERECO, hintText: HINT_ENDERECO),
                               validator: (value) {
-                                return value.isEmpty ? '$POR_FAVOR_DIGITE $O $HINT_ENDERECO' : null;
+                                return value.isEmpty
+                                    ? '$POR_FAVOR_DIGITE $O $HINT_ENDERECO'
+                                    : null;
                               },
                               onSaved: (value) {
                                 endereco = value;
                               },
                             ),
+                            SizedBox(
+                                height:
+                                    MediaQuery.of(context).size.width * 0.1),
                             RaisedButton(
-                              child: Text(SALVAR),
+                              child: Text(CADASTRAR),
                               onPressed: () {
                                 submeter(context);
                               },
                             )
                           ],
-                        )
-                    )
-                )
-            )
-        )
-    );
+                        ))))));
   }
 
   void submeter(BuildContext context) {
     if (_formKey.currentState.validate()) {
       _formKey.currentState.save();
 
-      print ('Salvou $nome');
+      print('Salvou $nome');
       criarBombeiro();
-
     }
   }
 
@@ -167,11 +171,11 @@ class CadastroBombeiroState extends State<CadastroBombeiro> {
     if (response.statusCode == 201) {
       // If the server did return a 201 CREATED response,
       // then parse the JSON.
-      print ('Criado');
+      print('Criado');
     } else {
       // If the server did not return a 201 CREATED response,
       // then throw an exception.
-      print ('ERRO');
+      print('ERRO');
       throw Exception('Failed to load album');
     }
   }
