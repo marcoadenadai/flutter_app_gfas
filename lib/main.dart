@@ -5,7 +5,7 @@ import 'package:GFAS/login/admin.dart';
 import 'package:GFAS/login/bombeiro.dart';
 import 'package:GFAS/cadastro/bombeiro.dart';
 import 'package:GFAS/cadastro/admin.dart';
-import 'package:GFAS/cadastro/cadastro_opcao.dart';
+import 'package:GFAS/cadastro/opcao.dart';
 import 'package:GFAS/users/admin/faq.dart';
 import 'package:GFAS/map/cadastra_area.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';

@@ -74,7 +74,7 @@ class _CadastraTerrenoState extends State<CadastraTerreno> {
   //AS INFOS SOBRE OS PONTOS DA REGIAO SELECIONADA DE MANEIRA CORRETA?
   Future criarAdministrador() async {
     final http.Response response = await http.post(
-      'http://192.168.1.128:8080/administradores',
+      'http://ec2-52-67-230-208.sa-east-1.compute.amazonaws.com:8000/gfas-srv-user/administradores',
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },

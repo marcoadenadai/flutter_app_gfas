@@ -24,8 +24,6 @@ class CadastroBombeiroState extends State<CadastroBombeiro> {
 
   var maskTelefone = new MaskTextInputFormatter(
       mask: '(##) #####-####', filter: {"#": RegExp(r'[0-9]')});
-  var maskCPF = new MaskTextInputFormatter(
-      mask: '###.###.###-##', filter: {"#": RegExp(r'[0-9]')});
   var maskCEP = new MaskTextInputFormatter(
       mask: '##.###-###', filter: {"#": RegExp(r'[0-9]')});
 
@@ -148,13 +146,14 @@ class CadastroBombeiroState extends State<CadastroBombeiro> {
       _formKey.currentState.save();
 
       print('Salvou $nome');
-      criarBombeiro();
+
+      criarBombeiro(context);
     }
   }
 
-  void criarBombeiro() async {
+  void criarBombeiro(BuildContext context) async {
     final http.Response response = await http.post(
-      'http://192.168.1.128:8080/bombeiros',
+      'http://ec2-52-67-230-208.sa-east-1.compute.amazonaws.com:8000/gfas-srv-user/corpobombeiros',
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
@@ -171,7 +170,8 @@ class CadastroBombeiroState extends State<CadastroBombeiro> {
     if (response.statusCode == 201) {
       // If the server did return a 201 CREATED response,
       // then parse the JSON.
-      print('Criado');
+      Navigator.of(context).pushNamed('/entrarOpcao');
+
     } else {
       // If the server did not return a 201 CREATED response,
       // then throw an exception.
