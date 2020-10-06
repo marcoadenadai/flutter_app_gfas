@@ -9,6 +9,7 @@ import 'package:GFAS/cadastro/opcao.dart';
 import 'package:GFAS/users/admin/faq.dart';
 import 'package:GFAS/map/cadastra_area.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:GFAS/users/admin/home.dart';
 
 void main() async {
   runApp(GFASApp());
@@ -65,7 +66,7 @@ class _GFASAppState extends State<GFASApp> {
         //user
         '/faq': (BuildContext context) => FAQ(),
         //'/mapaAdministrador': (BuildContext context) => MapaAdministrador(),
-        //'/menuAdministrador': (BuildContext context) => MenuAdministrador(),
+        '/menuAdministrador': (BuildContext context) => MenuAdministrador(),
       },
     );
   }
