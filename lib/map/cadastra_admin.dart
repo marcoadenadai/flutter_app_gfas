@@ -41,12 +41,12 @@ class CadastroObj {
 CadastroObj cadastro;
 //VARIAVEL GLOBAL ACESSADA PELO CADASTRA_OPCAO!
 
-class CadastraTerreno extends StatefulWidget {
+class CadastraTerrenoAdmin extends StatefulWidget {
   @override
-  _CadastraTerrenoState createState() => _CadastraTerrenoState();
+  _CadastraTerrenoAdminState createState() => _CadastraTerrenoAdminState();
 }
 
-class _CadastraTerrenoState extends State<CadastraTerreno> {
+class _CadastraTerrenoAdminState extends State<CadastraTerrenoAdmin> {
   Icon _searchIcon = new Icon(Icons.search);
   static String def_title = "Cadastrar Terreno";
   Widget _appBarTitle = new Text(def_title);
@@ -70,8 +70,7 @@ class _CadastraTerrenoState extends State<CadastraTerreno> {
     return ret;
   }
 
-  //FUNCAO DE CADASTRO!! CHARLES DA UMA OLAHDA AQUI, SERA Q TO PASSANDO
-  //AS INFOS SOBRE OS PONTOS DA REGIAO SELECIONADA DE MANEIRA CORRETA?
+  //FUNCAO DE CADASTRO
   Future criarAdministrador() async {
     final http.Response response = await http.post(
       'http://ec2-52-67-230-208.sa-east-1.compute.amazonaws.com:8000/gfas-srv-user/administradores',
@@ -107,7 +106,7 @@ class _CadastraTerrenoState extends State<CadastraTerreno> {
   }
 
   //************************************************************************/
-  _CadastraTerrenoState() {
+  _CadastraTerrenoAdminState() {
     if (Pos().pos != null)
       pos = LatLng(Pos().pos.latitude, Pos().pos.longitude);
     else
@@ -236,6 +235,7 @@ class _CadastraTerrenoState extends State<CadastraTerreno> {
     });
   }
 
+  // ignore: non_constant_identifier_names
   Widget SearchBar(BuildContext context) {
     return AppBar(
       centerTitle: _center_title,
@@ -247,11 +247,13 @@ class _CadastraTerrenoState extends State<CadastraTerreno> {
     );
   }
 
-  showAlertDialog(BuildContext context, String titulo, String msg) {
+  Future<String> showAlertDialog(
+      BuildContext context, String titulo, String msg) async {
+    String returnVal = 'fail';
     Widget okButton = FlatButton(
       child: Text("OK"),
       onPressed: () {
-        Navigator.pop(context);
+        Navigator.pop(context, 'success');
       },
     );
 
@@ -265,14 +267,16 @@ class _CadastraTerrenoState extends State<CadastraTerreno> {
     );
 
     // show the dialog
-    showDialog(
+    returnVal = await showDialog(
       context: context,
       builder: (BuildContext context) {
         return alert;
       },
     );
+    return returnVal;
   }
 
+  // ignore: non_constant_identifier_names
   Widget FloatingButtons(BuildContext context) {
     if (!_searching) {
       if (_selecting) {
@@ -315,10 +319,17 @@ class _CadastraTerrenoState extends State<CadastraTerreno> {
                   print("raio(km):" + _raio.toString());
                   print("centro=" + _centroide.toString());
                   //CADASTRA AKI!!!
-                  criarAdministrador()
-                      .then((value) =>
-                          print("criarAdministrador()->" + value.toString()))
-                      .catchError((e) {
+                  criarAdministrador().then((value) async {
+                    print("criarAdministrador()->" + value.toString());
+                    if (value == true) {
+                      await showAlertDialog(context, "Sucesso!",
+                              "Seu cadastro foi criado, estamos redirecionando você para a tela inicial.")
+                          .then((value) {
+                        Navigator.of(context)
+                            .popUntil((route) => route.isFirst);
+                      });
+                    }
+                  }).catchError((e) {
                     print("criarAdministrador()->" + e.toString());
                     showAlertDialog(context, "Erro no cadastro",
                         "Connection timed out, verifique sua conexão e tente novamente..");

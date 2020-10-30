@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
+import 'package:GFAS/map/pos.dart';
+import 'package:GFAS/map/cadastra_bombeiro.dart';
 
 class CadastroBombeiro extends StatefulWidget {
   @override
@@ -13,14 +15,10 @@ class CadastroBombeiro extends StatefulWidget {
 }
 
 class CadastroBombeiroState extends State<CadastroBombeiro> {
+  CadastroBombeiroState() {
+    cadastro = new CadastroObj('', '', '', '', '', '', '');
+  }
   final _formKey = GlobalKey<FormState>();
-
-  String nome = '';
-  String senha = '';
-  String email = '';
-  String telefone = '';
-  String cep = '';
-  String endereco = '';
 
   var maskTelefone = new MaskTextInputFormatter(
       mask: '(##) #####-####', filter: {"#": RegExp(r'[0-9]')});
@@ -53,7 +51,7 @@ class CadastroBombeiroState extends State<CadastroBombeiro> {
                                     : null;
                               },
                               onSaved: (value) {
-                                nome = value;
+                                cadastro.nome = value;
                               },
                             ),
                             TextFormField(
@@ -67,7 +65,7 @@ class CadastroBombeiroState extends State<CadastroBombeiro> {
                                     : null;
                               },
                               onSaved: (value) {
-                                senha = value;
+                                cadastro.senha = value;
                               },
                             ),
                             TextFormField(
@@ -81,7 +79,7 @@ class CadastroBombeiroState extends State<CadastroBombeiro> {
                                     : VALIDACAO_EMAIL;
                               },
                               onSaved: (value) {
-                                email = value;
+                                cadastro.email = value;
                               },
                             ),
                             TextFormField(
@@ -98,7 +96,8 @@ class CadastroBombeiroState extends State<CadastroBombeiro> {
                                     : null;
                               },
                               onSaved: (value) {
-                                telefone = maskTelefone.getUnmaskedText();
+                                cadastro.telefone =
+                                    maskTelefone.getUnmaskedText();
                               },
                             ),
                             TextFormField(
@@ -113,26 +112,14 @@ class CadastroBombeiroState extends State<CadastroBombeiro> {
                                     : null;
                               },
                               onSaved: (value) {
-                                cep = maskCEP.getUnmaskedText();
-                              },
-                            ),
-                            TextFormField(
-                              decoration: InputDecoration(
-                                  labelText: ENDERECO, hintText: HINT_ENDERECO),
-                              validator: (value) {
-                                return value.isEmpty
-                                    ? '$POR_FAVOR_DIGITE $O $HINT_ENDERECO'
-                                    : null;
-                              },
-                              onSaved: (value) {
-                                endereco = value;
+                                cadastro.cep = maskCEP.getUnmaskedText();
                               },
                             ),
                             SizedBox(
                                 height:
                                     MediaQuery.of(context).size.width * 0.1),
                             RaisedButton(
-                              child: Text(CADASTRAR),
+                              child: Text("Continuar"),
                               onPressed: () {
                                 submeter(context);
                               },
@@ -141,42 +128,13 @@ class CadastroBombeiroState extends State<CadastroBombeiro> {
                         ))))));
   }
 
-  void submeter(BuildContext context) {
+  Future<void> submeter(BuildContext context) async {
     if (_formKey.currentState.validate()) {
       _formKey.currentState.save();
-
-      print('Salvou $nome');
-
-      criarBombeiro(context);
-    }
-  }
-
-  void criarBombeiro(BuildContext context) async {
-    final http.Response response = await http.post(
-      'http://ec2-52-67-230-208.sa-east-1.compute.amazonaws.com:8000/gfas-srv-user/corpobombeiros',
-      headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
-      },
-      body: jsonEncode(<String, String>{
-        'nome': nome,
-        'senha': senha,
-        'email': email,
-        'telefone': telefone,
-        'cep': cep,
-        'endereco': endereco
-      }),
-    );
-
-    if (response.statusCode == 201) {
-      // If the server did return a 201 CREATED response,
-      // then parse the JSON.
-      Navigator.of(context).pushNamed('/entrarOpcao');
-
-    } else {
-      // If the server did not return a 201 CREATED response,
-      // then throw an exception.
-      print('ERRO');
-      throw Exception('Failed to load album');
+      //print('Salvou $cadastro.nome');
+      await Pos().init();
+      Navigator.of(context).pushNamed('/cadastraTerrenoBombeiro');
+      //criarAdministrador();
     }
   }
 }

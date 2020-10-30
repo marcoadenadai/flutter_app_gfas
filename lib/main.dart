@@ -7,7 +7,8 @@ import 'package:GFAS/cadastro/bombeiro.dart';
 import 'package:GFAS/cadastro/admin.dart';
 import 'package:GFAS/cadastro/opcao.dart';
 import 'package:GFAS/users/admin/faq.dart';
-import 'package:GFAS/map/cadastra_area.dart';
+import 'package:GFAS/map/cadastra_admin.dart';
+import 'package:GFAS/map/cadastra_bombeiro.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:GFAS/users/admin/home.dart';
 
@@ -61,7 +62,11 @@ class _GFASAppState extends State<GFASApp> {
         '/cadastroOpcao': (BuildContext context) => CadastroOpcao(),
         '/cadastroAdministrador': (BuildContext context) =>
             CadastroAdministrador(),
-        '/cadastraTerreno': (BuildContext context) => CadastraTerreno(),
+        '/cadastraTerrenoAdmin': (BuildContext context) =>
+            CadastraTerrenoAdmin(),
+        '/cadastraTerrenoBombeiro': (BuildContext context) =>
+            CadastraTerrenoBombeiro(),
+
         '/cadastroBombeiro': (BuildContext context) => CadastroBombeiro(),
         //user
         '/faq': (BuildContext context) => FAQ(),
