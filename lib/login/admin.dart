@@ -70,8 +70,7 @@ class LoginAdministradorState extends State<LoginAdministrador> {
                               child: Text("Entrar"),
                               onPressed: () {
                                 //submeter(context);
-                                Navigator.of(context)
-                                    .pushNamed('/menuAdministrador');
+                                Navigator.of(context).pushNamed('/homeAdmin');
                               },
                             ),
                             BotaoCadastroGFAS(),

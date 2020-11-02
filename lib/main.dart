@@ -6,7 +6,7 @@ import 'package:GFAS/login/bombeiro.dart';
 import 'package:GFAS/cadastro/bombeiro.dart';
 import 'package:GFAS/cadastro/admin.dart';
 import 'package:GFAS/cadastro/opcao.dart';
-import 'package:GFAS/users/admin/faq.dart';
+import 'package:GFAS/users/faq.dart';
 import 'package:GFAS/map/cadastra_admin.dart';
 import 'package:GFAS/map/cadastra_bombeiro.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
@@ -71,7 +71,7 @@ class _GFASAppState extends State<GFASApp> {
         //user
         '/faq': (BuildContext context) => FAQ(),
         //'/mapaAdministrador': (BuildContext context) => MapaAdministrador(),
-        '/menuAdministrador': (BuildContext context) => MenuAdministrador(),
+        '/homeAdmin': (BuildContext context) => HomeAdmin(),
       },
     );
   }
