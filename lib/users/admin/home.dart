@@ -3,6 +3,7 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong/latlong.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:flutter_email_sender/flutter_email_sender.dart';
 
 class HomeAdmin extends StatefulWidget {
   @override
@@ -12,6 +13,7 @@ class HomeAdmin extends StatefulWidget {
 class _HomeAdminState extends State<HomeAdmin> {
   LatLng _pos = LatLng(-22.8330542, -47.0509806);
   var points = <LatLng>[];
+  LatLng centroide = null;
   MapController _mapController = MapController();
   int _notificationCounter = 0;
   //--------------------------------------------
@@ -164,11 +166,33 @@ class _HomeAdminState extends State<HomeAdmin> {
           _createDrawerItem(
             icon: Icons.person_outline,
             text: 'Meu perfil',
+            onTap: () {
+              Navigator.of(context).pushNamed('/perfilAdmin');
+            },
             //editar cadastro admin
           ),
           _createDrawerItem(
             icon: Icons.email,
             text: 'Sugestões',
+            onTap: () async {
+              final Email email = Email(
+                body: '',
+                subject: 'Sugestão GFAS',
+                recipients: ['sugestoes@gfas.com'],
+                isHTML: false,
+              );
+
+              await FlutterEmailSender.send(email)
+                  .then((value) => null)
+                  .catchError((e) {
+                showAlertDialog(
+                    context,
+                    "Ops",
+                    "Ocorreu um erro ao encontrar um aplicativo" +
+                        " de emails no seu sistema, instale o app" +
+                        " do seu provedor de emails para acessar essa funcionalidade.");
+              });
+            },
           ),
           _createDrawerItem(
             icon: Icons.help,
@@ -180,6 +204,10 @@ class _HomeAdminState extends State<HomeAdmin> {
           _createDrawerItem(
             icon: Icons.exit_to_app,
             text: 'Encerrar Sessão',
+            onTap: () {
+              //todo quando tiver sessao mesmo encerrala
+              Navigator.of(context).popUntil((route) => route.isFirst);
+            },
           ),
         ],
       ),
@@ -235,6 +263,35 @@ class _HomeAdminState extends State<HomeAdmin> {
             ),
           );
         });
+  }
+
+  Future<String> showAlertDialog(
+      BuildContext context, String titulo, String msg) async {
+    String returnVal = 'fail';
+    Widget okButton = FlatButton(
+      child: Text("OK"),
+      onPressed: () {
+        Navigator.pop(context, 'success');
+      },
+    );
+
+    // set up the AlertDialog
+    AlertDialog alert = AlertDialog(
+      title: Text(titulo),
+      content: Text(msg),
+      actions: [
+        okButton,
+      ],
+    );
+
+    // show the dialog
+    returnVal = await showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+    return returnVal;
   }
 
   //BUILD!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
