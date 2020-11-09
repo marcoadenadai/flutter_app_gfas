@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:GFAS/map/pos.dart';
-import 'package:GFAS/map/cadastra_admin.dart';
+import 'package:GFAS/cadastro/cadastra_admin.dart';
 
 class CadastroAdministrador extends StatefulWidget {
   @override
@@ -159,6 +159,7 @@ class CadastroAdministradorState extends State<CadastroAdministrador> {
       _formKey.currentState.save();
       //print('Salvou $cadastro.nome');
       await Pos().init();
+
       Navigator.of(context).pushNamed('/cadastraTerrenoAdmin');
       //criarAdministrador();
     }

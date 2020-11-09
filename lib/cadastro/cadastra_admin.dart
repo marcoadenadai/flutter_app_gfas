@@ -12,6 +12,8 @@ class CadastroObj {
   String senha = '';
   String email = '';
   String telefone = '';
+  String cpf = '';
+  String rg = '';
   String cep = '';
 
   CadastroObj(String n, String s, String e, String tel, String cpf, String rg,
@@ -20,6 +22,8 @@ class CadastroObj {
     senha = s;
     email = e;
     telefone = tel;
+    this.cpf = cpf;
+    this.rg = rg;
     this.cep = cep;
   }
 
@@ -28,6 +32,8 @@ class CadastroObj {
     this.senha = '';
     this.email = '';
     this.telefone = '';
+    this.cpf = '';
+    this.rg = '';
     this.cep = '';
   }
 }
@@ -35,13 +41,12 @@ class CadastroObj {
 CadastroObj cadastro;
 //VARIAVEL GLOBAL ACESSADA PELO CADASTRA_OPCAO!
 
-class CadastraTerrenoBombeiro extends StatefulWidget {
+class CadastraTerrenoAdmin extends StatefulWidget {
   @override
-  _CadastraTerrenoBombeiroState createState() =>
-      _CadastraTerrenoBombeiroState();
+  _CadastraTerrenoAdminState createState() => _CadastraTerrenoAdminState();
 }
 
-class _CadastraTerrenoBombeiroState extends State<CadastraTerrenoBombeiro> {
+class _CadastraTerrenoAdminState extends State<CadastraTerrenoAdmin> {
   Icon _searchIcon = new Icon(Icons.search);
   static String def_title = "Cadastrar Terreno";
   Widget _appBarTitle = new Text(def_title);
@@ -65,9 +70,10 @@ class _CadastraTerrenoBombeiroState extends State<CadastraTerrenoBombeiro> {
     return ret;
   }
 
-  Future criarBombeiro() async {
+  //FUNCAO DE CADASTRO
+  Future criarAdministrador() async {
     final http.Response response = await http.post(
-      'http://ec2-52-67-230-208.sa-east-1.compute.amazonaws.com:8000/gfas-srv-user/corpobombeiros',
+      'http://ec2-52-67-230-208.sa-east-1.compute.amazonaws.com:8000/gfas-srv-user/administradores',
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
@@ -76,9 +82,11 @@ class _CadastraTerrenoBombeiroState extends State<CadastraTerrenoBombeiro> {
         'senha': cadastro.senha,
         'email': cadastro.email,
         'telefone': cadastro.telefone,
+        'cpf': cadastro.cpf,
+        'rg': cadastro.rg,
         'cep': cadastro.cep,
         'lat_centro': _centroide.latitude.toString(),
-        'lng_cetnro': _centroide.longitude.toString(),
+        'lng_centro': _centroide.longitude.toString(),
         'raio': _raio.toString(),
         'points': getJsonPoints(points),
       }),
@@ -88,6 +96,7 @@ class _CadastraTerrenoBombeiroState extends State<CadastraTerrenoBombeiro> {
       // If the server did return a 201 CREATED response,
       // then parse the JSON.
       print('Criado');
+      print(getJsonPoints(points));
       return Future.value(true);
     } else {
       // If the server did not return a 201 CREATED response,
@@ -98,7 +107,7 @@ class _CadastraTerrenoBombeiroState extends State<CadastraTerrenoBombeiro> {
   }
 
   //************************************************************************/
-  _CadastraTerrenoBombeiroState() {
+  _CadastraTerrenoAdminState() {
     if (Pos().pos != null)
       pos = LatLng(Pos().pos.latitude, Pos().pos.longitude);
     else
@@ -311,8 +320,8 @@ class _CadastraTerrenoBombeiroState extends State<CadastraTerrenoBombeiro> {
                   print("raio(km):" + _raio.toString());
                   print("centro=" + _centroide.toString());
                   //CADASTRA AKI!!!
-                  criarBombeiro().then((value) async {
-                    print("criarBombeiro()->" + value.toString());
+                  criarAdministrador().then((value) async {
+                    print("criarAdministrador()->" + value.toString());
                     if (value == true) {
                       await showAlertDialog(context, "Sucesso!",
                               "Seu cadastro foi criado, estamos redirecionando você para a tela inicial.")
@@ -322,7 +331,7 @@ class _CadastraTerrenoBombeiroState extends State<CadastraTerrenoBombeiro> {
                       });
                     }
                   }).catchError((e) {
-                    print("criarBombeiro()->" + e.toString());
+                    print("criarAdministrador()->" + e.toString());
                     showAlertDialog(context, "Erro no cadastro",
                         "Connection timed out, verifique sua conexão e tente novamente..");
                   });

@@ -4,6 +4,7 @@ import 'package:latlong/latlong.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:flutter_email_sender/flutter_email_sender.dart';
+import 'package:GFAS/users/sessao.dart';
 
 class HomeAdmin extends StatefulWidget {
   @override
@@ -11,6 +12,7 @@ class HomeAdmin extends StatefulWidget {
 }
 
 class _HomeAdminState extends State<HomeAdmin> {
+  Sessao S = new Sessao();
   LatLng _pos = LatLng(-22.8330542, -47.0509806);
   var points = <LatLng>[];
   LatLng centroide = null;
@@ -57,6 +59,19 @@ class _HomeAdminState extends State<HomeAdmin> {
           onPressed: () {
             setState(() {
               _notificationCounter++;
+              //S.admin_get("17dbf467-7f6a-4ef4-a658-3690664cc190");
+              /*Sessao tmp = new Sessao(
+                id: "17dbf467-7f6a-4ef4-a658-3690664cc190",
+                nome: "Editado",
+                cep: "13600777",
+                telefone: "19977777777",
+                cpf: "77777777777",
+                rg: "7777777777",
+                email: "editado@email.com",
+                senha: "goiabada77",
+              );
+              S.admin_update(tmp);*/
+              S.admin_get("17dbf467-7f6a-4ef4-a658-3690664cc190");
               // todo: !!! pegar centroide da propriedade
               //_mapController.move(
               //      LatLng(value.latitude, value.longitude), 13.0);
