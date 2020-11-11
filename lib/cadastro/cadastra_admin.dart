@@ -15,9 +15,10 @@ class CadastroObj {
   String cpf = '';
   String rg = '';
   String cep = '';
+  String token = '';
 
   CadastroObj(String n, String s, String e, String tel, String cpf, String rg,
-      String cep) {
+      String cep, String tok) {
     nome = n;
     senha = s;
     email = e;
@@ -25,6 +26,7 @@ class CadastroObj {
     this.cpf = cpf;
     this.rg = rg;
     this.cep = cep;
+    token =  tok;
   }
 
   void clear() {
@@ -35,6 +37,7 @@ class CadastroObj {
     this.cpf = '';
     this.rg = '';
     this.cep = '';
+    this.token = '';
   }
 }
 
@@ -89,6 +92,7 @@ class _CadastraTerrenoAdminState extends State<CadastraTerrenoAdmin> {
         'lng_centro': _centroide.longitude.toString(),
         'raio': _raio.toString(),
         'points': getJsonPoints(points),
+        'token': cadastro.token,
       }),
     );
 
