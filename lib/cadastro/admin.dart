@@ -6,6 +6,11 @@ import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:GFAS/map/pos.dart';
 import 'package:GFAS/cadastro/cadastra_admin.dart';
 
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'dart:async';
+
+import 'cadastra_admin.dart';
+
 class CadastroAdministrador extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => CadastroAdministradorState();
@@ -13,8 +18,10 @@ class CadastroAdministrador extends StatefulWidget {
 
 class CadastroAdministradorState extends State<CadastroAdministrador> {
   CadastroAdministradorState() {
-    cadastro = new CadastroObj('', '', '', '', '', '', '');
+    cadastro = new CadastroObj('', '', '', '', '', '', '', '');
   }
+
+  final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
   final _formKey = GlobalKey<FormState>();
 
   var maskTelefone = new MaskTextInputFormatter(
@@ -26,6 +33,17 @@ class CadastroAdministradorState extends State<CadastroAdministrador> {
   var maskRG = new MaskTextInputFormatter(
       mask: '##.###.###-L',
       filter: {"#": RegExp(r"[0-9]"), "L": RegExp(r"[0-9]|[a-z]|[A-Z]")});
+
+  @override
+  void initState() {
+    super.initState();
+    _firebaseMessaging.getToken().then((String token) {
+      assert(token != null);
+      print("O TOKEN do USER " + token);
+      cadastro.token = token;
+      print("O Cadastro Token " + cadastro.token);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
