@@ -62,15 +62,12 @@ class _CadastraTerrenoAdminState extends State<CadastraTerrenoAdmin> {
   LatLng _centroide;
   double _raio = 0;
 
-  String getJsonPoints(List<LatLng> p) {
-    String ret = "[";
+  List getJsonPoints(List<LatLng> p) {
+    List points = [];
     for (int i = 0; i < p.length; i++) {
-      if (i != 0) ret += ",";
-      ret += p[i].latitude.toString();
-      ret += "," + p[i].longitude.toString();
+      points.add({'latitude': p[i].latitude, 'longitude': p[i].longitude});
     }
-    ret += "]";
-    return ret;
+    return points;
   }
 
   //FUNCAO DE CADASTRO
@@ -93,7 +90,7 @@ class _CadastraTerrenoAdminState extends State<CadastraTerrenoAdmin> {
           'longitude': _centroide.longitude
         },
         'raioCentroide': _raio.toString(),
-        //'coordenadasArea': getJsonPoints(points),
+        'coordenadasArea': getJsonPoints(points),
         'pushToken': cadastro.token,
       }),
     );
