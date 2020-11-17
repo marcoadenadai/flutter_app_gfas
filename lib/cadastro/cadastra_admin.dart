@@ -80,19 +80,21 @@ class _CadastraTerrenoAdminState extends State<CadastraTerrenoAdmin> {
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
-      body: jsonEncode(<String, String>{
+      body: jsonEncode(<String, dynamic>{
         'nome': cadastro.nome,
-        'senha': cadastro.senha,
         'email': cadastro.email,
         'telefone': cadastro.telefone,
         'cpf': cadastro.cpf,
         'rg': cadastro.rg,
         'cep': cadastro.cep,
-        'lat_centro': _centroide.latitude.toString(),
-        'lng_centro': _centroide.longitude.toString(),
-        'raio': _raio.toString(),
-        'points': getJsonPoints(points),
-        'token': cadastro.token,
+        'senha': cadastro.senha,
+        'coordenadaCentroide': {
+          'latitude': _centroide.latitude,
+          'longitude': _centroide.longitude
+        },
+        'raioCentroide': _raio.toString(),
+        //'coordenadasArea': getJsonPoints(points),
+        'pushToken': cadastro.token,
       }),
     );
 
