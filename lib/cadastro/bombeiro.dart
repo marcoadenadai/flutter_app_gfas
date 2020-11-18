@@ -1,10 +1,12 @@
 import 'package:GFAS/constants.dart';
 import 'package:email_validator/email_validator.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:GFAS/map/pos.dart';
 import 'package:GFAS/cadastro/cadastra_bombeiro.dart';
+
 
 class CadastroBombeiro extends StatefulWidget {
   @override
@@ -13,14 +15,26 @@ class CadastroBombeiro extends StatefulWidget {
 
 class CadastroBombeiroState extends State<CadastroBombeiro> {
   CadastroBombeiroState() {
-    cadastro = new CadastroObj('', '', '', '', '', '', '');
+    cadastro = new CadastroObj('', '', '', '', '', '', '', '');
   }
+  final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
   final _formKey = GlobalKey<FormState>();
 
   var maskTelefone = new MaskTextInputFormatter(
       mask: '(##) #####-####', filter: {"#": RegExp(r'[0-9]')});
   var maskCEP = new MaskTextInputFormatter(
       mask: '##.###-###', filter: {"#": RegExp(r'[0-9]')});
+
+  @override
+  void initState() {
+    super.initState();
+    _firebaseMessaging.getToken().then((String token) {
+      assert(token != null);
+      print("O TOKEN do USER bombeiro " + token);
+      cadastro.token = token;
+      print("O Cadastro Token bombeiro " + cadastro.token);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -128,10 +142,8 @@ class CadastroBombeiroState extends State<CadastroBombeiro> {
   Future<void> submeter(BuildContext context) async {
     if (_formKey.currentState.validate()) {
       _formKey.currentState.save();
-      //print('Salvou $cadastro.nome');
       await Pos().init();
       Navigator.of(context).pushNamed('/cadastraTerrenoBombeiro');
-      //criarAdministrador();
     }
   }
 }

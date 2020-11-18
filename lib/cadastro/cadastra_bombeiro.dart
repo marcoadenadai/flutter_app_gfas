@@ -13,14 +13,16 @@ class CadastroObj {
   String email = '';
   String telefone = '';
   String cep = '';
+  String token = '';
 
   CadastroObj(String n, String s, String e, String tel, String cpf, String rg,
-      String cep) {
-    nome = n;
-    senha = s;
-    email = e;
-    telefone = tel;
+      String cep, String tok) {
+    this.nome = n;
+    this.senha = s;
+    this.email = e;
+    this.telefone = tel;
     this.cep = cep;
+    this.token = tok;
   }
 
   void clear() {
@@ -29,6 +31,7 @@ class CadastroObj {
     this.email = '';
     this.telefone = '';
     this.cep = '';
+    this.token = '';
   }
 }
 
@@ -54,15 +57,12 @@ class _CadastraTerrenoBombeiroState extends State<CadastraTerrenoBombeiro> {
   LatLng _centroide;
   double _raio = 0;
 
-  String getJsonPoints(List<LatLng> p) {
-    String ret = "[";
+  List getJsonPoints(List<LatLng> p) {
+    List points = [];
     for (int i = 0; i < p.length; i++) {
-      if (i != 0) ret += ",";
-      ret += p[i].latitude.toString();
-      ret += "," + p[i].longitude.toString();
+      points.add({'latitude': p[i].latitude, 'longitude': p[i].longitude});
     }
-    ret += "]";
-    return ret;
+    return points;
   }
 
   Future criarBombeiro() async {
@@ -71,16 +71,19 @@ class _CadastraTerrenoBombeiroState extends State<CadastraTerrenoBombeiro> {
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
-      body: jsonEncode(<String, String>{
+      body: jsonEncode(<String, dynamic>{
         'nome': cadastro.nome,
-        'senha': cadastro.senha,
         'email': cadastro.email,
         'telefone': cadastro.telefone,
         'cep': cadastro.cep,
-        'lat_centro': _centroide.latitude.toString(),
-        'lng_centro': _centroide.longitude.toString(),
-        'raio': _raio.toString(),
-        'points': getJsonPoints(points),
+        'senha': cadastro.senha,
+        'coordenadaCentroide': {
+          'latitude': _centroide.latitude,
+          'longitude': _centroide.longitude
+        },
+        'raioCentroide': _raio,
+        'coordenadasArea': getJsonPoints(points),
+        'pushToken': cadastro.token,
       }),
     );
 
