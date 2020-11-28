@@ -26,7 +26,7 @@ class CadastroObj {
     this.cpf = cpf;
     this.rg = rg;
     this.cep = cep;
-    this.token =  tok;
+    this.token = tok;
   }
 
   void clear() {
@@ -320,6 +320,7 @@ class _CadastraTerrenoAdminState extends State<CadastraTerrenoAdmin> {
                   _centroide = getPolygonCentroid(points);
                   _raio = calculatePropertyRadius(
                       getPolygonCentroid(points), points);
+                  if (_raio < 1) _raio = 1;
                   print("raio(km):" + _raio.toString());
                   print("centro=" + _centroide.toString());
                   //CADASTRA AKI!!!

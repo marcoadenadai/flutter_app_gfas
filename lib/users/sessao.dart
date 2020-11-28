@@ -9,32 +9,42 @@ class Sessao {
   String nome;
   String email;
   String cep;
-  String senha;
   String rg;
   String cpf;
+  String senha;
   String telefone;
-  String raio;
-  //pos-vars
   LatLng centroide;
-  var points = <LatLng>[];
+  int raio;
+  List<LatLng> points;
+
   //constructor
   Sessao(
       {this.id,
       this.nome,
       this.email,
-      this.senha,
       this.cep,
       this.rg,
       this.telefone,
       this.cpf,
-      this.raio,
+      this.senha,
       this.centroide,
+      this.raio,
       this.points});
   //funcoes
   factory Sessao.fromJson(Map<String, dynamic> json) {
-    //double lat = json['lat_centro'] as double;
-    //double lng = json['lng_centro'] as double;
-    //var pts = jsonDecode(json['points']).cast<LatLng>();
+    List<LatLng> parsePoints(Map<String, dynamic> input) {
+      List<LatLng> ret = new List<LatLng>();
+      int size = json['coordenadasArea'].length;
+      double lat, lng;
+
+      for (int i = 0; i < size; i++) {
+        lat = json['coordenadasArea'][i]['latitude'] as double;
+        lng = json['coordenadasArea'][i]['longitude'] as double;
+        ret.add(new LatLng(lat, lng));
+      }
+      return ret;
+    }
+
     return Sessao(
       id: json['id'] as String,
       nome: json['nome'] as String,
@@ -43,15 +53,30 @@ class Sessao {
       rg: json['rg'] as String,
       cpf: json['cpf'] as String,
       telefone: json['telefone'] as String,
-      //centroide: new LatLng(lat, lng),
-      //senha: json['senha'] as String,
-      raio: json['raio'] as String,
-      //points: pts,
-      //todo: ver se funcionou o parse dos points, precisa adicionar campos de cadastro.
+      centroide: new LatLng(json['coordenadaCentroide']['latitude'] as double,
+          json['coordenadaCentroide']['longitude'] as double),
+      raio: json['raioCentroide'] as int,
+      points: parsePoints(json),
     );
   }
 
   //f(x)
+  Sessao copy(Sessao old) {
+    Sessao ret = new Sessao();
+    ret.id = old.id;
+    ret.nome = old.nome;
+    ret.email = old.email;
+    ret.cep = old.cep;
+    ret.rg = old.rg;
+    ret.senha = old.senha;
+    ret.telefone = old.telefone;
+    ret.cpf = old.cpf;
+    ret.centroide = old.centroide;
+    ret.raio = old.raio;
+    ret.points = old.points;
+    return ret;
+  }
+
   String getJsonPoints(List<LatLng> p) {
     String ret = "[";
     for (int i = 0; i < p.length; i++) {
@@ -73,7 +98,7 @@ class Sessao {
         });
 
     if (response.statusCode == 200) {
-      print('GET_ID OK\n' + response.body);
+      print('GET_DB(ID) OK\n');
       Sessao tmp = Sessao.fromJson(jsonDecode(response.body));
       this.id = tmp.id;
       this.nome = tmp.nome;
@@ -83,29 +108,10 @@ class Sessao {
       this.rg = tmp.rg;
       this.telefone = tmp.telefone;
       this.cpf = tmp.cpf;
-      print("id: " +
-          this.id +
-          "\n" +
-          "nome: " +
-          this.nome +
-          //"\n senha:" +
-          //this.senha +
-          "\n" +
-          "email: " +
-          this.email +
-          "\n" +
-          "cep: " +
-          this.cep +
-          "\n" +
-          "rg: " +
-          this.rg +
-          "\n" +
-          "cpf: " +
-          this.cpf +
-          "\n" +
-          "telefone: " +
-          this.telefone +
-          "\n");
+      this.raio = tmp.raio;
+      this.centroide = tmp.centroide;
+      this.points = tmp.points;
+
       return Future.value(true);
     } else {
       print('ERRO' + response.statusCode.toString() + ' :');
@@ -124,17 +130,12 @@ class Sessao {
       body: jsonEncode(<String, String>{
         'id': S.id,
         'nome': S.nome,
-        'senha':
-            S.senha, //preciso atualizar a senha pra continuar tendo senha...
         'email': S.email,
         'telefone': S.telefone,
         'cpf': S.cpf,
         'rg': S.rg,
+        'senha': S.senha,
         'cep': S.cep,
-        //'lat_centro': centroide.latitude.toString(),
-        //'lng_centro': centroide.longitude.toString(),
-        //'raio': raio.toString(),
-        //'points': getJsonPoints(points),
       }),
     );
 
@@ -151,6 +152,28 @@ class Sessao {
       return Future.value(true);
     } else {
       print('ERRO' + response.statusCode.toString() + ' :');
+      return Future.error("fail");
+    }
+  }
+
+  Future login(String tel, String senha) async {
+    final http.Response response = await http.post(
+      'http://ec2-52-67-230-208.sa-east-1.compute.amazonaws.com:8000/gfas-srv-user/auth',
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(<String, dynamic>{
+        'login': tel,
+        'senha': senha,
+      }),
+    );
+
+    if (response.statusCode == 200) {
+      print('Sucesso no Login');
+      Map<String, dynamic> retorno = jsonDecode(response.body);
+      return Future.value(retorno['id']);
+    } else {
+      print('ERRO: ' + response.statusCode.toString());
       return Future.error("fail");
     }
   }

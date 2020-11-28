@@ -72,8 +72,8 @@ class _GFASAppState extends State<GFASApp> {
         //user
         '/faq': (BuildContext context) => FAQ(),
         //'/mapaAdministrador': (BuildContext context) => MapaAdministrador(),
-        '/homeAdmin': (BuildContext context) => HomeAdmin(),
-        '/perfilAdmin': (BuildContext context) => PerfilAdmin(),
+        //'/homeAdmin': (BuildContext context) => HomeAdmin(),
+        //'/perfilAdmin': (BuildContext context) => PerfilAdmin(),
       },
     );
   }

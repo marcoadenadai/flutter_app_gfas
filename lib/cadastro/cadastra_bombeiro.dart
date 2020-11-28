@@ -311,6 +311,7 @@ class _CadastraTerrenoBombeiroState extends State<CadastraTerrenoBombeiro> {
                   _centroide = getPolygonCentroid(points);
                   _raio = calculatePropertyRadius(
                       getPolygonCentroid(points), points);
+                  if (_raio < 1) _raio = 1;
                   print("raio(km):" + _raio.toString());
                   print("centro=" + _centroide.toString());
                   //CADASTRA AKI!!!

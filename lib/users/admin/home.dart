@@ -6,27 +6,50 @@ import 'package:geolocator/geolocator.dart';
 import 'package:flutter_email_sender/flutter_email_sender.dart';
 import 'package:GFAS/users/sessao.dart';
 
+import 'profile.dart';
+
 class HomeAdmin extends StatefulWidget {
+  String id_login;
+  HomeAdmin({Key key, this.id_login}) : super(key: key);
   @override
-  _HomeAdminState createState() => _HomeAdminState();
+  _HomeAdminState createState() => _HomeAdminState(id_login);
 }
 
 class _HomeAdminState extends State<HomeAdmin> {
   Sessao S = new Sessao();
   LatLng _pos = LatLng(-22.8330542, -47.0509806);
   var points = <LatLng>[];
-  LatLng centroide = null;
+  LatLng centroide;
   MapController _mapController = MapController();
   int _notificationCounter = 0;
+  String _id;
+  String _displayName = "Usuário";
   //--------------------------------------------
-  _HomeAdminState() {}
+  _HomeAdminState(String id) {
+    this._id = id;
+  }
+
+  @override
+  void initState() {
+    S.admin_get(_id).then((value) {
+      setState(() {
+        points = S.points;
+        centroide = S.centroide;
+        _displayName = S.nome;
+        _displayName =
+            "${_displayName[0].toUpperCase()}${_displayName.substring(1)}";
+      });
+    });
+    super.initState();
+  }
+
   //--------------------------------------------
   Widget mapa(BuildContext context) {
     return FlutterMap(
       options: MapOptions(
         //onTap: (latlng) {},
         center: _pos,
-        zoom: 11.0,
+        zoom: 13.0,
       ),
       mapController: _mapController,
       layers: [
@@ -59,22 +82,7 @@ class _HomeAdminState extends State<HomeAdmin> {
           onPressed: () {
             setState(() {
               _notificationCounter++;
-              //S.admin_get("17dbf467-7f6a-4ef4-a658-3690664cc190");
-              /*Sessao tmp = new Sessao(
-                id: "17dbf467-7f6a-4ef4-a658-3690664cc190",
-                nome: "Editado",
-                cep: "13600777",
-                telefone: "19977777777",
-                cpf: "77777777777",
-                rg: "7777777777",
-                email: "editado@email.com",
-                senha: "goiabada77",
-              );
-              S.admin_update(tmp);*/
-              S.admin_get("17dbf467-7f6a-4ef4-a658-3690664cc190");
-              // todo: !!! pegar centroide da propriedade
-              //_mapController.move(
-              //      LatLng(value.latitude, value.longitude), 13.0);
+              _mapController.move(centroide, _mapController.zoom);
             });
           },
           heroTag: null,
@@ -87,12 +95,13 @@ class _HomeAdminState extends State<HomeAdmin> {
             await getCurrentPosition(desiredAccuracy: LocationAccuracy.high)
                 .then((value) {
               setState(() {
-                _mapController.move(
-                    LatLng(value.latitude, value.longitude), 13.0);
+                _mapController.move(LatLng(value.latitude, value.longitude),
+                    _mapController.zoom);
               });
             }).catchError((e) {
               setState(() {
-                _mapController.move(LatLng(-22.8330542, -47.0509806), 13.0);
+                _mapController.move(
+                    LatLng(-22.8330542, -47.0509806), _mapController.zoom);
               });
             });
           },
@@ -104,7 +113,7 @@ class _HomeAdminState extends State<HomeAdmin> {
 
   Widget topbar(BuildContext context) {
     return AppBar(
-      title: Text("Olá, Usuário"),
+      title: Text("Olá, " + _displayName),
       actions: <Widget>[
         new Stack(
           children: <Widget>[
@@ -182,7 +191,14 @@ class _HomeAdminState extends State<HomeAdmin> {
             icon: Icons.person_outline,
             text: 'Meu perfil',
             onTap: () {
-              Navigator.of(context).pushNamed('/perfilAdmin');
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => PerfilAdmin(
+                      S: S,
+                    ),
+                  ));
+              //Navigator.of(context).pushNamed('/perfilAdmin');
             },
             //editar cadastro admin
           ),
