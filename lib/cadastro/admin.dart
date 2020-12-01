@@ -43,6 +43,20 @@ class CadastroAdministradorState extends State<CadastroAdministrador> {
       cadastro.token = token;
       print("O Cadastro Token " + cadastro.token);
     });
+    _firebaseMessaging.configure(
+        onLaunch: (Map<String, dynamic> msg) async {
+          print('onLaunch');
+        },
+        onResume: (Map<String, dynamic> msg) async {
+          print('onResumeee' + msg['data']['latitude']);
+        },
+        onMessage: (Map<String, dynamic> msg) async {
+          print('onMessageee');
+        },
+        onBackgroundMessage: (Map<String, dynamic> msg) async {
+          print('onBackgroundMessage' + msg['data']['latitude']);
+        },
+    );
   }
 
   @override
