@@ -5,4 +5,7 @@ Global Fire Alert System (GFAS) App
 ![x](videos/logado.gif)
 
 
-![Alt Text](https://media.giphy.com/media/vFKqnCdLPNOKc/giphy.gif)
+![notificacao.mp4](videos/notificacao.mp4)
+![cadastro.mp4](videos/cadastro.mp4)
+
+
